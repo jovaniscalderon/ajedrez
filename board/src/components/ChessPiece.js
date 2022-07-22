@@ -10,7 +10,7 @@ class ChessPiece extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    this.theme = "pixel";
+    this.theme = "normal";
   }
 
   static get styles() {

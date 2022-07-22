@@ -10,7 +10,7 @@ import "./ChessCell.js";
 // Translate positions to coordinates
 import { coords, toggleColorPieces } from "../modules/Utils.js";
 
-const DEFAULT_THEME = "manzdev";
+const DEFAULT_THEME = "wood";
 
 export class ChessBoard extends HTMLElement {
   static container = null;
@@ -35,12 +35,21 @@ export class ChessBoard extends HTMLElement {
     this.stage = new Stage();
   }
 
+  /* Here we create the board with css to render it on the html later.
+      We define here:
+        - the size of the particular cells
+        - the size of the board by multiplying the cells by 8
+        - the size of the chess pieces
+      Here we also have the themes of the board that we can purchase.
+      Last but not least, we define the css for the frame that we create by
+      using fake cells outside the board*/
+
   static get styles() {
     return /* css */`
       :host {
         --selected-cell-color: #0f06;
         --valid-cell-color: #f006;
-        --piece-size: 54px;
+        --piece-size: 35px;
         --cell-size: 72px;
         --board-size: calc(var(--cell-size) * 8);
         --border-style: 0;
@@ -54,16 +63,16 @@ export class ChessBoard extends HTMLElement {
         --frame-color: #62351f;
       }
 
-      :host(.manzdev) {
+      :host(.future) {
         --color-odd: #f566e8;
         --color-even: #7135a4;
         --frame-color: #421768;
       }
 
-      :host(.forest) {
-        --color-odd: #ebecd0;
-        --color-even: #779556;
-        --frame-color: #3d5226;
+      :host(.pokemon) {
+        --color-odd: #d64241;
+        --color-even: #e5e3da;
+        --frame-color: #a04241;
       }
 
       :host(.classic) {
@@ -72,10 +81,10 @@ export class ChessBoard extends HTMLElement {
         --frame-color: #000000;
       }
 
-      :host(.ocean) {
-        --color-odd: #99ccff;
-        --color-even: #026498;
-        --frame-color: #09364e;
+      :host(.pikachu) {
+        --color-odd: #fad61d;
+        --color-even: #e19720;
+        --frame-color: #7c582d;
       }
 
       .frame {
@@ -147,6 +156,9 @@ export class ChessBoard extends HTMLElement {
     const texts = ((n === 8) ? "87654321" : " abcdefgh ").split("");
     return texts.map(text => /* html */`<div class="fake">${text}</div>`).join("");
   }
+
+  /*In this Secction we render the cells by creating a FOR cycle
+    for the colums and, inside that, another FOR cycle for the rows*/
 
   renderCells() {
     for (let col = 0; col < 8; col++) {
@@ -288,7 +300,8 @@ export class ChessBoard extends HTMLElement {
 
     this.turn.set(turn);
   }
-
+  
+  //here we obtain the position of a piece
   at(coords) {
     return this.getCell(coords).shadowRoot;
   }
@@ -301,6 +314,12 @@ export class ChessBoard extends HTMLElement {
 
     this.pieces.push(piece);
   }
+
+  /*This is the render image of the chessboard
+    Here we have the frame of the chessborard that works as a container.
+    inside the container we create the frame in which we put the numbers
+    and letters from the board.
+    Then we have the board itself.*/
 
   render() {
     this.shadowRoot.innerHTML = /* html */`
