@@ -19,22 +19,55 @@ board.setFromFEN("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w");
       pieces and themes and inside those options we create the
       different skins */
 
-const gui = new dat.GUI();
+/*Verifico suscripción*/
+const getPlayer = async (Utils) => {
+  try {
+    const response = await Utils.postService({
+        service: "validateSession", 
+        data: {}, 
+        method: "GET" 
+    });
+    if(response.succes){
+      return {
+        succes: true,
+        player: response.player
+      };
+    }else{
+      alert(response.error.cod + ": " + response.error.message);
+    }
+  } catch(error) {
+    console.error(error);
+  }
+  return {
+    succes: false
+  };
+}
 
-const options = {
-  pieces: "normal",
-  theme: "wood"
-};
+let player = await getPlayer(document.Utils);
+console.warn(player)
+if(player.succes){
+  let playerData = player.player;
+  let isSuscripted = playerData.suscribed
+  console.warn(playerData)
+  console.warn(isSuscripted)
+  if(isSuscripted){
+    const gui = new dat.GUI();
 
-gui.add(options, "pieces", ["normal", "pixel" ])
-  .onChange(data => board.changePieces(data));
-
-gui.add(options, "theme", ["wood", "future", "pokemon", "classic", "pikachu"])
-  .onChange(data => {
-    const chessboard = document.querySelector("chess-board");
-    chessboard.classList.remove("wood", "future", "pokemon", "classic", "pikachu");
-    chessboard.classList.add(data);
-  });
-
-gui.close();
-
+    const options = {
+      pieces: "normal",
+      theme: "wood"
+    };
+    
+    gui.add(options, "pieces", ["normal", "pixel" ])
+      .onChange(data => board.changePieces(data));
+    
+    gui.add(options, "theme", ["wood", "future", "pokemon", "classic", "pikachu"])
+      .onChange(data => {
+        const chessboard = document.querySelector("chess-board");
+        chessboard.classList.remove("wood", "future", "pokemon", "classic", "pikachu");
+        chessboard.classList.add(data);
+      });
+    
+    gui.close();
+  }
+}
