@@ -3,11 +3,30 @@
 }
 
 body {
-  background: #223;
+  /* background: #223; */
+  background: url('../public/background/background.png');
+  background-size: cover;
+  background-position: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .container {
   display: flex;
   justify-content: center;
   margin-top: 5em;
+}
+
+.logout{
+  position: absolute;
+  top: 10px;
+  right: 0;
+  padding: 10px 20px;
+  text-transform: capitalize;
+  font-size: 16px;
+  color: #fff;
+  background: none;
+  text-decoration: underline;
+  cursor: pointer;
+  outline: none;
+  border: none;
 }

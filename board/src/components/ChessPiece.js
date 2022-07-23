@@ -40,6 +40,7 @@ class ChessPiece extends HTMLElement {
     this.render();
   }
 
+  /* Calls rules json to set the movement of every type of piece */
   get directions() {
     const type = this.type.toLowerCase();
     return RULES[type];
@@ -77,6 +78,8 @@ class ChessPiece extends HTMLElement {
     return this.type.toLowerCase() === "q";
   }
 
+  /* This method is used to make sure the other piece
+     in the cell is an opponent and you can defeat it*/
   isOpponentOf(piece) {
     return this.color !== piece.color;
   }

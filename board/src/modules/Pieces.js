@@ -1,10 +1,11 @@
 export class Pieces {
   constructor() {
-    this.numPieces = 0;
-    this.pieces = {};
-    this.captured = {};
+    this.numPieces = 0;//total pieces
+    this.pieces = {};//alive
+    this.captured = {};//captured
   }
 
+  /* pushing the pieces into the board */
   push(piece) {
     this.numPieces++;
     let number = 0;
@@ -22,6 +23,7 @@ export class Pieces {
     this.captured[piece.id] = piece;
   }
 
+  /*obtaining the pieces id */
   get(id) {
     return this.pieces[id];
   }

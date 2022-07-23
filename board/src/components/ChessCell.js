@@ -77,6 +77,7 @@ class ChessCell extends HTMLElement {
     return !this.piece;
   }
 
+  /* Creates the animation for a piece´s death */
   createHalo() {
     const halo = document.createElement("div");
     halo.classList.add("halo");
@@ -84,6 +85,7 @@ class ChessCell extends HTMLElement {
     return halo;
   }
 
+  /* Creates an animation to remove the piece */
   elevateToHeaven(piece) {
     return new Promise((resolve, reject) => {
       const halo = this.createHalo();
