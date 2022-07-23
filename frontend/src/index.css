@@ -16,32 +16,30 @@ body {
   margin-top: 5em;
 }
 
-.logout{
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80%;
-  height: 35px;
-  display: block;
-  margin: 20px auto;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.3);
+.navbar, .btnBar{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #62351fb4;
   border: none;
-  color: #fff;
-  padding: 15px;
-  transition: .5s;
+}
+
+.navbar li, .btnBar{
+  display: inline;
+  float: left;
+
+}
+
+.navbar a, .btnBar{
+  display: block;
+  padding: 8px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.btnBar{
   text-transform: capitalize;
-  cursor: pointer;
-}
-
-.logout:hover{
-  background: #fff;
-  color: #000;
-}
-
-.logout{
-  width: auto;
-  padding: 0 20px;
-  cursor: pointer;
-  margin: 50px auto 0;
 }

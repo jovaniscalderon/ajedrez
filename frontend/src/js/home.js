@@ -11,9 +11,8 @@
         },
         handlers: {
             indexFormOnSubmit: async (e) => {
-                e.preventDefault();
-
                 if(e.target.id === "logout"){
+                    e.preventDefault();
                     try {
                         const response = await Utils.postService({
                             service: "logout", 
@@ -26,6 +25,24 @@
                             });
                         }else{
                             alert(response.response.message);
+                        }
+                    } catch(error) {
+                        console.error(error);
+                    }
+                }
+                if(e.target.id === "subscribe"){
+                    e.preventDefault();
+                    try {
+                        const response = await Utils.postService({
+                            service: "subscribe", 
+                            data: {}, 
+                            method: "POST" 
+                        });
+                        if(response.succes){
+                            alert("Subscribed!");
+                            location.reload();
+                        }else{
+                            alert(response.error.cod + ": " + response.error.message);
                         }
                     } catch(error) {
                         console.error(error);
