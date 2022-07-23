@@ -44,12 +44,9 @@ const getPlayer = async (Utils) => {
 }
 
 let player = await getPlayer(document.Utils);
-console.warn(player)
 if(player.succes){
   let playerData = player.player;
-  let isSuscripted = playerData.suscribed
-  console.warn(playerData)
-  console.warn(isSuscripted)
+  let isSuscripted = playerData.suscribed;
   if(isSuscripted){
     const gui = new dat.GUI();
 
