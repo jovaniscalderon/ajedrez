@@ -32,7 +32,11 @@
                             data: data, 
                             method: "POST" 
                         });
-                        console.log(response);
+                        if(response.succes){
+                            //Redirige a index
+                        }else{
+                            alert(response.error.cod + ": " + response.error.message);
+                        }
                     } catch(error) {
                         console.error(error);
                     }
@@ -70,7 +74,11 @@
                             data: data, 
                             method: "POST" 
                         });
-                        console.log(response);
+                        if(response.succes){
+                            //Redirige a index
+                        }else{
+                            alert(response.error.cod + ": " + response.error.message);
+                        }
                     } catch(error) {
                         console.error(error);
                     }
