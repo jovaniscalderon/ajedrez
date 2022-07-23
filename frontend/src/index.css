@@ -18,15 +18,30 @@ body {
 
 .logout{
   position: absolute;
-  top: 10px;
+  top: 0;
   right: 0;
-  padding: 10px 20px;
-  text-transform: capitalize;
-  font-size: 16px;
-  color: #fff;
-  background: none;
-  text-decoration: underline;
-  cursor: pointer;
-  outline: none;
+  width: 80%;
+  height: 35px;
+  display: block;
+  margin: 20px auto;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.3);
   border: none;
+  color: #fff;
+  padding: 15px;
+  transition: .5s;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.logout:hover{
+  background: #fff;
+  color: #000;
+}
+
+.logout{
+  width: auto;
+  padding: 0 20px;
+  cursor: pointer;
+  margin: 50px auto 0;
 }

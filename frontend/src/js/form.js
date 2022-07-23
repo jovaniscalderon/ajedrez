@@ -15,9 +15,9 @@
         },
         handlers: {
             loginFormOnSubmit: async (e) => {
-                e.preventDefault();
-
                 if(e.target.id === "btnLogin"){
+                    e.preventDefault();
+
                     const user = App.htmlElements.userInput.value;
                     const pass = App.htmlElements.passInput.value;
 
@@ -33,7 +33,9 @@
                             method: "POST" 
                         });
                         if(response.succes){
-                            //Redirige a index
+                            Utils.navigate({
+                                route: "index"
+                            });
                         }else{
                             alert(response.error.cod + ": " + response.error.message);
                         }
@@ -42,6 +44,8 @@
                     }
                 }
                 if(e.target.id === "btnSignUp"){
+                    e.preventDefault();
+
                     const user = App.htmlElements.userInput.value;
                     const pass = App.htmlElements.passInput.value;
                     const name = App.htmlElements.nameInput.value;
@@ -75,7 +79,9 @@
                             method: "POST" 
                         });
                         if(response.succes){
-                            //Redirige a index
+                            Utils.navigate({
+                                route: "index"
+                            });
                         }else{
                             alert(response.error.cod + ": " + response.error.message);
                         }

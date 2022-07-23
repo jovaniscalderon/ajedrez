@@ -2,9 +2,17 @@
     const Utils = {
         settings: {
             backendBaseUrl: "http://localhost:3000",
+            frontendBaseUrl: "http://localhost:3001"
         },
         getFormattedBackendUrl: ({ service }) => {
             return `${Utils.settings.backendBaseUrl}/${service}`;
+        },
+        getFormattedFrontendUrl: ({ route }) => {
+            return `${Utils.settings.frontendBaseUrl}/${route}.html`;
+        },
+        navigate: ({ route }) => {
+            let newUrl = Utils.getFormattedFrontendUrl({ route });
+            window.location.replace(newUrl);
         },
         postService: ({ service, data, method }) => {
             return Utils.fetch({

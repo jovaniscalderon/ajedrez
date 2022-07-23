@@ -21,7 +21,9 @@
                             method: "GET" 
                         });
                         if(response.response.cod === 'LOGOUT'){
-                            //redirect a login
+                            Utils.navigate({
+                                route: "login"
+                            });
                         }else{
                             alert(response.response.message);
                         }
