@@ -67,6 +67,30 @@ app.get('/', isAuthenticated, (req, res) => {
     res.send(output);
 });
 
+app.get('/validateSession', isAuthenticated, async (req, res) => {
+    let id = req.session.user;
+    //Recupero usuario de la base de datos
+    let playerRead = await PlayerModel.find({ id });
+    if (playerRead.length) { //El usuario existe
+        let { name, score, suscribed } = playerRead[0];
+        //Salida para el cliente
+        res.json({ 
+            player: {
+                id,
+                name,
+                score,
+                suscribed
+            }, 
+            succes: true
+        });
+        return;
+    }else{ //No existe el usuario
+        cod = "UNAUTHORIZED";
+        message = "Usuario no registrado";
+    }
+    res.json({ error: {cod, message}, succes: false });
+});
+
 app.post('/register', express.urlencoded({ extended: false }), async (req, res) => {
     //Inicializo variables
     let cod = "";
@@ -228,6 +252,40 @@ app.post("/api/pagosbg", async (req, res) => {
     };
     const response = await yappyClient.getPaymentUrl(newPayment);
     res.json(response);
+});
+
+app.post('/subscribe', isAuthenticated, express.urlencoded({ extended: false }), async (req, res) => {
+    let id = req.session.user;
+    //Recupero usuario de la base de datos
+    let playerRead = await PlayerModel.find({ id });
+    if (playerRead.length) { //El usuario existe
+        let { name, score, suscribed } = playerRead[0];
+        if(suscribed){ //El ususario ya esta suscrito
+            cod = "SCBE_001";
+            message = "Usuario ya esta suscrito";
+        }else{
+            await PlayerModel.updateOne({ id }, {
+                $set: {
+                    suscribed: true
+                }
+            });
+            //Salida para el cliente
+            res.json({ 
+                player: {
+                    id: id,
+                    name: name,
+                    score: score,
+                    suscribed: true
+                }, 
+                succes: true 
+            });
+            return;
+        }
+    }else{
+        cod = "SCBE_002";
+        message = "Usuario no registrado";
+    }
+    res.json({ error: {cod, message}, succes: false });
 });
 
 db.then(() => {
