@@ -20,7 +20,11 @@
                             data: {}, 
                             method: "GET" 
                         });
-                        console.log(response);
+                        if(response.response.cod === 'LOGOUT'){
+                            //redirect a login
+                        }else{
+                            alert(response.response.message);
+                        }
                     } catch(error) {
                         console.error(error);
                     }
