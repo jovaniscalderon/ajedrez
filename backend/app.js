@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 const mongoose = require("mongoose");
 var bodyParser = require('body-parser');
+const { v4: uuidv4 } = require("uuid");
+const { createClient } = require("yappy-node-back-sdk");
 
 const { PlayerModel } = require("./models");
 
@@ -13,6 +15,21 @@ const {
     PORT = 3000,
     MONGODB_URI = "mongodb://admin:password@localhost:27017/chess?authSource=admin",
 } = process.env;
+
+let yappyClient = createClient(process.env.MERCHANT_ID, process.env.SECRET_KEY);
+
+const payment = {
+    total: null,
+    subtotal: null,
+    shipping: 0.0,
+    discount: 0.0,
+    taxes: null,
+    orderId: null,
+    successUrl: href="/frontend/success.html",
+    failUrl: href="/frontend/error.html",
+    tel: process.env.TEL || "66666666",
+    domain: process.env.DOMAIN || "https://yappy.peqa.dev",
+};
 
 const db = mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
@@ -195,6 +212,22 @@ app.get('/logout', function (req, res, next) {
             succes: false
         });
     }
+});
+
+app.post("/api/pagosbg", async (req, res) => {
+    const { price: subtotal } = req.body;
+    const uuid = uuidv4();
+    const taxes = Number((subtotal * 0.07).toFixed(2));
+    const total = subtotal + taxes;
+    const newPayment = {
+      ...payment,
+      subtotal: 0.01, // Para evitar tener que pagar durante la prueba
+      taxes: 0.01, // Para evitar tener que pagar durante la prueba
+      total: 0.02, // Para evitar tener que pagar durante la prueba
+      orderId: uuid.split("-").join("").slice(0, 10),
+    };
+    const response = await yappyClient.getPaymentUrl(newPayment);
+    res.json(response);
 });
 
 db.then(() => {
