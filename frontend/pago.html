@@ -11,7 +11,7 @@
   <div class="shop-container">
     <form id="shop-form" class="shop gradient-border" action="">
       <div class="card">
-        <img src="/frontend/img/chess table.jpg" alt="Denim Jeans" style="width:100%">
+        <img src="/img/chess_table.jpg" alt="Denim Jeans" style="width:100%">
         <h1>Skin 01</h1>
         <p class="price">$19.99</p>
         <p>Ejemplo</p>
@@ -90,7 +90,7 @@
             const { data: { url } } = await axios.post(
               'http://localhost:3000/api/pagosbg'
             );
-            App.htmlElements.yappyButton.classList.value = 'yappy-button flex',
+            App.htmlElements.yappyButton.classList.value = 'yappy-button flex'
             App.htmlElements.yappyAnchor.href = url;
             App.htmlElements.yappyAnchor.target = "_blank";
           }
