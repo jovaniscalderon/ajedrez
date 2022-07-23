@@ -17,8 +17,7 @@ const {
 } = process.env;
 
 let yappyClient = createClient(process.env.MERCHANT_ID, process.env.SECRET_KEY);
-console.log(process.env.MERCHANT_ID)
-console.log(process.env.SECRET_KEY)
+
 const payment = {
     total: null,
     subtotal: null,
