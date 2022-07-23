@@ -17,7 +17,8 @@ const {
 } = process.env;
 
 let yappyClient = createClient(process.env.MERCHANT_ID, process.env.SECRET_KEY);
-
+console.log(process.env.MERCHANT_ID)
+console.log(process.env.SECRET_KEY)
 const payment = {
     total: null,
     subtotal: null,
@@ -238,7 +239,7 @@ app.get('/logout', function (req, res, next) {
     }
 });
 
-app.post("/api/pagosbg", async (req, res) => {
+app.post("/pagosbg", async (req, res) => {
     const { price: subtotal } = req.body;
     const uuid = uuidv4();
     const taxes = Number((subtotal * 0.07).toFixed(2));

@@ -33,7 +33,13 @@ const getPlayer = async (Utils) => {
         player: response.player
       };
     }else{
-      alert(response.error.cod + ": " + response.error.message);
+      if(response.error.cod === "UNAUTHORIZED"){
+        Utils.navigate({
+          route: "login"
+        });
+      }else{
+        alert(response.error.cod + ": " + response.error.message);
+      }
     }
   } catch(error) {
     console.error(error);
