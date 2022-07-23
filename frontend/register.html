@@ -8,18 +8,27 @@
     <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
-    
-    <div class="register-form">
-        <h1 class="header">register</h1>
-        
-        <input type="text" placeholder="username" autocomplete="off" class="username" required>
-        <input type="email" placeholder="email" autocomplete="off" class="email" required>
-        <input type="password" placeholder="password" autocomplete="off" class="password" required>
+    <form id="login-form" class="formulario">
+        <div class="register-form">
+            <h1 class="header">register</h1>
+            
+            <input id="user-query" type="text" placeholder="Username" autocomplete="off" class="email" required>
+            <input id="pass-query" type="password" placeholder="Password" autocomplete="off" class="password" required>
+            <input id="name-query" type="text" placeholder="Name" autocomplete="off" class="email" required>
+            <select name="score-query" id="score-query">
+              <option value="new">New to Chess</option>
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select> 
+            <label for="score-query">What is your chess skill level?</label>
 
-        <button class="submit-btn">login</button>
-        <a href="login.html" class="link">already have an account? log in!</a>
-    </div>
+            <button id="btnSignUp" class="submit-btn">Sign Up</button>
+            <a href="login.html" class="link">Already have an account? Log In</a>
+        </div>
+    </form>
 
+    <script src="js/utils.js"></script>
     <script src="js/form.js"></script>
 
 </body>

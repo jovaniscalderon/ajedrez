@@ -5,6 +5,7 @@ const app = express();
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 const mongoose = require("mongoose");
+var bodyParser = require('body-parser');
 
 const { PlayerModel } = require("./models");
 
@@ -18,13 +19,20 @@ const db = mongoose.connect(MONGODB_URI, {
     useUnifiedTopology: true,
 });
 
-app.use(cors());
+//Inicio bloque de middleware
+var corsOptions = {
+    credentials: true,
+    origin: true
+}
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(session({
-    secret: 'keyboard cat',
+    secret: '123456',
     resave: false,
     saveUninitialized: true
 }));
+app.use(bodyParser.json());
+//Fin bloque de middleware
 
 function isAuthenticated (req, res, next) {
     if (req.session.user){

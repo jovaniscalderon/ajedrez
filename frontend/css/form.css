@@ -56,7 +56,6 @@ input, .submit-btn{
     color: #fff;
     padding: 15px;
     transition: .5s;
-    text-transform: capitalize;
 }
 
 input::placeholder{
